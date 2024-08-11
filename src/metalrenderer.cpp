@@ -1,6 +1,7 @@
 #include "metalrenderer.h"
+#include <iostream>
 
-MetalRenderer::MetalRenderer(MTL::Device* device, CAMetalLayer* layer) 
+MetalRenderer::MetalRenderer(MTL::Device* device, CA::MetalLayer* layer)
     : device(device), metalLayer(layer) {
     createCommandQueue();
     createRenderPipeline();
@@ -11,7 +12,7 @@ MetalRenderer::~MetalRenderer() {
 }
 
 void MetalRenderer::render() {
-    CAMetalDrawable* drawable = metalLayer->nextDrawable();
+    CA::MetalDrawable* drawable = metalLayer->nextDrawable();
     if (!drawable) return;
 
     MTL::RenderPassDescriptor* passDescriptor = MTL::RenderPassDescriptor::alloc()->init();
@@ -28,7 +29,10 @@ void MetalRenderer::render() {
 }
 
 void MetalRenderer::setLayerSize(float width, float height) {
-    metalLayer->setDrawableSize(MTL::Size(width, height));
+    auto size = CGSize();
+    size.width = width;
+    size.height = height;
+    metalLayer->setDrawableSize(size);
 }
 
 void MetalRenderer::createCommandQueue() {

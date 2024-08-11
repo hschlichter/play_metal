@@ -5,6 +5,7 @@ workspace "MyMetalApp"
 project "MyMetalApp"
     kind "ConsoleApp"
     language "C++"
+    cppdialect "C++17"
     targetdir "bin/%{cfg.buildcfg}"
     location "_out"
     files {
@@ -19,7 +20,7 @@ project "MyMetalApp"
     -- Set up Xcode project
     xcodebuildsettings {
         ["CLANG_ENABLE_OBJC_ARC"] = "YES",  -- Enable ARC
-        ["MACOSX_DEPLOYMENT_TARGET"] = "10.11",  -- Minimum macOS version
+        ["MACOSX_DEPLOYMENT_TARGET"] = "10.14",  -- Minimum macOS version
         ["MTL_ENABLE_DEBUG_INFO"] = "YES"  -- Enable Metal debug info
     }
 

@@ -5,14 +5,14 @@
 
 class MetalRenderer {
 public:
-    MetalRenderer(MTL::Device* device, CAMetalLayer* layer);
+    MetalRenderer(MTL::Device* device, CA::MetalLayer* layer);
     ~MetalRenderer();
     void render();
     void setLayerSize(float width, float height);
 
 private:
     MTL::Device* device;
-    CAMetalLayer* metalLayer;
+    CA::MetalLayer* metalLayer;
     MTL::CommandQueue* commandQueue;
     MTL::RenderPipelineState* pipelineState;
 
