@@ -1,38 +1,31 @@
-workspace "PlayMetalApp"
+workspace "Play"
     configurations { "Debug", "Release" }
     location "_build"
 
-project "PlayMetalApp"
+project "Play"
     kind "ConsoleApp"
-    language "C++"
-    cppdialect "C++17"
-    targetdir "bin/%{cfg.buildcfg}"
-    location "_build"
-    files {
-        -- "src/**.mm",
-        "src/**.cpp",
-        "src/**.h",
-        "src/**.metal",
+    targetname "main"
+    targetdir "_out/%{cfg.buildcfg}/Play.app/Contents/MacOS/"
+    objdir "_temp/%{cfg.buildcfg}"
+
+    files { "src/**.m" }
+    includedirs { "/System/Library/Frameworks/Cocoa.framework/Headers" }
+
+    xcodebuildsettings {
+        ["INFOPLIST_FILE"] = "../Info.plist",
+        ["PRODUCT_BUNDLE_IDENTIFIER"] = "com.example.Play",
     }
 
-    externalincludedirs { "external/metal-cpp_macOS14.2_iOS17.2" }
+    xcodebuildresources {
+        "%{cfg.targetdir}/../Info.plist"
+    }
 
-    -- Set up Xcode project
-    xcodebuildsettings {
-        ["CLANG_ENABLE_OBJC_ARC"] = "YES",  -- Enable ARC
-        ["MACOSX_DEPLOYMENT_TARGET"] = "10.14",  -- Minimum macOS version
-        ["MTL_ENABLE_DEBUG_INFO"] = "YES"  -- Enable Metal debug info
+    postbuildcommands {
+        "{COPY} ../Info.plist %{cfg.targetdir}/../"
     }
 
     filter "system:macosx"
-        toolset "clang"
-        defines { "PLATFORM_MACOSX" }
-        links {
-            "Cocoa.framework",
-            "QuartzCore.framework",
-            "Metal.framework",
-            "MetalKit.framework",
-        }
+        links { "Cocoa.framework" }
 
     filter "configurations:Debug"
         defines { "DEBUG" }
