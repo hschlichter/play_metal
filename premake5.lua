@@ -4,16 +4,31 @@ workspace "Play"
 
 project "Play"
     kind "ConsoleApp"
+
+    language "C++"
+    cppdialect "C++17"
+
     targetname "main"
     targetdir "_out/%{cfg.buildcfg}/Play.app/Contents/MacOS/"
     objdir "_temp/%{cfg.buildcfg}"
 
-    files { "src/**.m" }
-    includedirs { "/System/Library/Frameworks/Cocoa.framework/Headers" }
+    files { 
+        "src/**.m",
+        "src/**.mm",
+        "src/**.h",
+        "src/**.cpp",
+    }
+
+    externalincludedirs { "/System/Library/Frameworks/Cocoa.framework/Headers" }
+    externalincludedirs { "external/metal-cpp_macOS14.2_iOS17.2" }
 
     xcodebuildsettings {
         ["INFOPLIST_FILE"] = "../Info.plist",
         ["PRODUCT_BUNDLE_IDENTIFIER"] = "com.example.Play",
+        -- ["CLANG_ENABLE_OBJC_ARC"] = "YES",
+        ["MACOSX_DEPLOYMENT_TARGET"] = "10.14",
+        ["MTL_ENABLE_DEBUG_INFO"] = "YES",
+        ["MTL_FAST_MATH"] = "YES",
     }
 
     xcodebuildresources {
@@ -21,11 +36,17 @@ project "Play"
     }
 
     postbuildcommands {
-        "{COPY} ../Info.plist %{cfg.targetdir}/../"
+        "echo 'hello'",
+        "{COPY} ../Info.plist %{cfg.targetdir}/../",
     }
-
+    
     filter "system:macosx"
-        links { "Cocoa.framework" }
+        links {
+            "Cocoa.framework",
+            "QuartzCore.framework",
+            "Metal.framework",
+            "MetalKit.framework",
+        }
 
     filter "configurations:Debug"
         defines { "DEBUG" }

@@ -1,16 +1,5 @@
-#include <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
-class AppDelegate : public NS::ApplicationDelegate
-{
-public:
-    virtual ~AppDelegate();
+@interface AppDelegate : NSObject <NSApplicationDelegate>
+@end
 
-    NS::Menu* createMenuBar();
-
-    virtual void applicationWillFinishLaunching(NS::Notification* notification) override;
-    virtual void applicationDidFinishLaunching(NS::Notification* notification) override;
-    virtual bool applicationShoudlTerminateAfterLastWindowClosed(NS::Application* sender) override;
-
-private:
-
-};

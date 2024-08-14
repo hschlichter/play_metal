@@ -1,20 +1,17 @@
 #pragma once
+#include <Metal/Metal.hpp>
+#include <QuartzCore/CAMetalLayer.h>
 
-namespace MTL
-{
-    class Device;
-    class CommandQueue;
-}
-
-class Renderer
-{
+class Renderer {
 public:
-    Renderer();
-    virtual ~Renderer();
+    Renderer(MTL::Device* device);
+    ~Renderer();
+    void draw(MTL::Drawable* drawable);
     
-    void Draw();
-
 private:
-    MTL::Device* m_Device;
-    MTL::CommandQueue* m_CommandQueue;
+    MTL::Device* _device;
+    MTL::CommandQueue* _commandQueue;
+    MTL::RenderPipelineState* _pipelineState;
+    MTL::Buffer* _vertexBuffer;
 };
+
