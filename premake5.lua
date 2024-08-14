@@ -1,15 +1,15 @@
-workspace "MyMetalApp"
+workspace "PlayMetalApp"
     configurations { "Debug", "Release" }
     location "_build"
 
-project "MyMetalApp"
+project "PlayMetalApp"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++17"
     targetdir "bin/%{cfg.buildcfg}"
-    location "_out"
+    location "_build"
     files {
-        "src/**.mm",
+        -- "src/**.mm",
         "src/**.cpp",
         "src/**.h",
         "src/**.metal",
