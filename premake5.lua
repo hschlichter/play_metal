@@ -36,7 +36,6 @@ project "Play"
     }
 
     postbuildcommands {
-        "echo 'hello'",
         "{COPY} ../Info.plist %{cfg.targetdir}/../",
     }
     
@@ -44,8 +43,10 @@ project "Play"
         links {
             "Cocoa.framework",
             "QuartzCore.framework",
+            "Foundation.framework",
             "Metal.framework",
             "MetalKit.framework",
+            "objc"
         }
 
     filter "configurations:Debug"

@@ -4,8 +4,8 @@
 #import "renderer.h"
 
 @implementation MetalView {
-    CAMetalLayer *_metalLayer;
-    Renderer *_renderer;
+    CAMetalLayer* _metalLayer;
+    Renderer* _renderer;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -25,10 +25,7 @@
 
 - (void)render {
     @autoreleasepool {
-        id<CAMetalDrawable> drawable = [_metalLayer nextDrawable];
-        if (drawable) {
-            _renderer->draw(reinterpret_cast<MTL::Drawable*>(drawable));
-        }
+        _renderer->draw(reinterpret_cast<CA::MetalLayer*>(_metalLayer));
         [self performSelector:@selector(render) withObject:nil afterDelay:1.0/60.0];
     }
 }
