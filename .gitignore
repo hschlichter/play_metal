@@ -2,3 +2,5 @@ _build/
 _out/
 _temp/
 .cache/
+
+compile_commands.json
