@@ -3,14 +3,17 @@
 #import <QuartzCore/CAMetalLayer.h>
 #import "renderer.h"
 
-@implementation MetalView {
+@implementation MetalView
+{
     CAMetalLayer* _metalLayer;
     Renderer* _renderer;
 }
 
-- (instancetype)initWithFrame:(NSRect)frameRect {
+- (instancetype)initWithFrame:(NSRect)frameRect
+{
     self = [super initWithFrame:frameRect];
-    if (self) {
+    if (self)
+    {
         _metalLayer = [CAMetalLayer layer];
         _metalLayer.device = MTLCreateSystemDefaultDevice();
         _metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
@@ -23,12 +26,13 @@
     return self;
 }
 
-- (void)render {
-    @autoreleasepool {
+- (void)render
+{
+    @autoreleasepool
+    {
         _renderer->draw(reinterpret_cast<CA::MetalLayer*>(_metalLayer));
-        [self performSelector:@selector(render) withObject:nil afterDelay:1.0/60.0];
+        [self performSelector:@selector(render) withObject:nil afterDelay:1.0 / 60.0];
     }
 }
 
 @end
-

@@ -46,7 +46,6 @@ project "Play"
             "Foundation.framework",
             "Metal.framework",
             "MetalKit.framework",
-            "objc"
         }
 
     filter "configurations:Debug"

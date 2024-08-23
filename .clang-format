@@ -1,0 +1,62 @@
+# To disable formatting for a section add this comment "block"
+#
+# // clang-format off
+#
+# // clang-format on
+#
+
+BasedOnStyle: LLVM
+
+ColumnLimit: 120
+IndentWidth: 4
+IndentCaseLabels: true
+UseTab: Never
+InsertNewlineAtEOF: true
+MaxEmptyLinesToKeep: 1
+BreakBeforeBraces: Allman
+ReflowComments: true
+PointerAlignment: Left
+SortIncludes: false
+BinPackArguments: false
+BinPackParameters: false
+
+---
+Language: Cpp
+Standard: c++17
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
+SeparateDefinitionBlocks: Always
+
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpacesInAngles: false
+SpacesInContainerLiterals: false
+SpacesInSquareBrackets: false
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceAroundPointerQualifiers: Before
+
+AlignConsecutiveAssignments: false
+AlignAfterOpenBracket: Align
+AlignArrayOfStructures: Right
+
+PackConstructorInitializers: CurrentLine
+EmptyLineBeforeAccessModifier: Always
+AccessModifierOffset: -4
+
+NamespaceIndentation: All
+FixNamespaceComments: false
+
+---
+Language: ObjC
+ObjCSpaceBeforeProtocolList: true
+ObjCSpaceAfterProperty: true
+ObjCBlockIndentWidth: 4
+AlignAfterOpenBracket: true
+PenaltyReturnTypeOnItsOwnLine: 60
+PenaltyBreakBeforeFirstCallParameter: 19

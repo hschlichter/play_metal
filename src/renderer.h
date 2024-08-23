@@ -1,6 +1,6 @@
 #pragma once
 
-namespace MTL 
+namespace MTL
 {
     class Device;
     class Drawable;
@@ -15,7 +15,7 @@ namespace CA
     class MetalLayer;
 }
 
-class Renderer 
+class Renderer
 {
 public:
     Renderer(MTL::Device* device);
@@ -25,7 +25,7 @@ public:
     void buildShaders();
     void buildBuffers();
     void draw(CA::MetalLayer* layer);
-    
+
 private:
     MTL::Device* _device;
     MTL::RenderPassDescriptor* _renderPassDescriptor;
@@ -34,4 +34,3 @@ private:
     MTL::Buffer* _vertexPositionsBuffer;
     MTL::Buffer* _vertexColorsBuffer;
 };
-

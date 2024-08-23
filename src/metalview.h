@@ -2,4 +2,3 @@
 
 @interface MetalView : NSView
 @end
-

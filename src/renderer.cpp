@@ -4,13 +4,11 @@
 #define MTL_PRIVATE_IMPLEMENTATION
 
 #include <Metal/Metal.hpp>
-/*#include <Metal/MTLRenderPass.hpp>*/
-#include <QuartzCore/CAMetalLayer.hpp>
 #include <QuartzCore/CAMetalDrawable.hpp>
+#include <QuartzCore/CAMetalLayer.hpp>
 #include <simd/simd.h>
 
-Renderer::Renderer(MTL::Device* device)
-: _device(device) 
+Renderer::Renderer(MTL::Device* device) : _device(device)
 {
     _commandQueue = _device->newCommandQueue();
     setupRenderPassDescriptor();
@@ -102,18 +100,16 @@ void Renderer::buildBuffers()
 {
     const size_t NumVertices = 3;
 
-    simd::float3 positions[NumVertices] =
-    {
-        {-0.8f,  0.8f, 0.0f },
-        { 0.0f, -0.8f, 0.0f },
-        { +0.8f,  0.8f, 0.0f }
+    simd::float3 positions[NumVertices] = {
+        {-0.8f,  0.8f, 0.0f},
+        { 0.0f, -0.8f, 0.0f},
+        { 0.8f,  0.8f, 0.0f}
     };
 
-    simd::float3 colors[NumVertices] =
-    {
-        {  1.0, 0.3f, 0.2f },
-        {  0.8f, 1.0, 0.0f },
-        {  0.8f, 0.0f, 1.0 }
+    simd::float3 colors[NumVertices] = {
+        { 1.0, 0.3f, 0.2f},
+        {0.8f,  1.0, 0.0f},
+        {0.8f, 0.0f,  1.0}
     };
 
     const size_t positionsDataSize = NumVertices * sizeof(simd::float3);
@@ -132,19 +128,19 @@ void Renderer::buildBuffers()
     _vertexColorsBuffer->didModifyRange(NS::Range::Make(0, _vertexColorsBuffer->length()));
 }
 
-void Renderer::draw(CA::MetalLayer* layer) 
+void Renderer::draw(CA::MetalLayer* layer)
 {
     CA::MetalDrawable* drawable = layer->nextDrawable();
     if (!drawable)
     {
         return;
     }
-    
+
     NS::AutoreleasePool* pool = NS::AutoreleasePool::alloc()->init();
 
     MTL::CommandBuffer* cmdBuf = _commandQueue->commandBuffer();
     _renderPassDescriptor->colorAttachments()->object(0)->setTexture(drawable->texture());
-    
+
     MTL::RenderCommandEncoder* enc = cmdBuf->renderCommandEncoder(_renderPassDescriptor);
     enc->setRenderPipelineState(_pipelineState);
     enc->setVertexBuffer(_vertexPositionsBuffer, 0, 0);
