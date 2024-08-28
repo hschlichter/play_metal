@@ -8,6 +8,7 @@ namespace MTL
     class RenderPipelineState;
     class Buffer;
     class RenderPassDescriptor;
+    enum PixelFormat : unsigned long;
 }
 
 namespace CA
@@ -18,16 +19,17 @@ namespace CA
 class Renderer
 {
 public:
-    Renderer(MTL::Device* device);
+    Renderer(MTL::Device* device, MTL::PixelFormat pixelFormat);
     ~Renderer();
 
-    void setupRenderPassDescriptor();
-    void buildShaders();
-    void buildBuffers();
-    void draw(CA::MetalLayer* layer);
+    void SetupRenderPassDescriptor();
+    void BuildShaders();
+    void BuildBuffers();
+    void Render(CA::MetalLayer* layer);
 
 private:
     MTL::Device* _device;
+    MTL::PixelFormat _pixelFormat;
     MTL::RenderPassDescriptor* _renderPassDescriptor;
     MTL::CommandQueue* _commandQueue;
     MTL::RenderPipelineState* _pipelineState;

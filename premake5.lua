@@ -29,32 +29,41 @@ project "Play-MacOS"
         "src/app/uikit/**",
     }
 
-    externalincludedirs { "external/metal-cpp_macOS14.2_iOS17.2" }
+    includedirs {
+        "src/",
+    }
+    
+    externalincludedirs { 
+        "external/metal-cpp_macOS14.2_iOS17.2"
+    }
 
     xcodebuildsettings {
         ["PRODUCT_BUNDLE_IDENTIFIER"] = "com.example.macos.Play",
         ["CLANG_ENABLE_OBJC_ARC"] = "YES",
         ["CLANG_ENABLE_MODULES"] = "YES",
+
+        ["CXX_STANDARD_LIBRARY"] = "libc++",
+        ["CLANG_CXX_LANGUAGE_STANDARD"] = "c++17",
+        ["CLANG_ENABLE_OBJC_WEAK"] = "YES",
+        ["CLANG_ENABLE_CXX_MODULES"] = "YES",
+        ["OTHER_CFLAGS"] = "-fmodules -fcxx-modules", 
+        
         ["MTL_ENABLE_DEBUG_INFO"] = "YES",
         ["MTL_FAST_MATH"] = "YES",
         ["INFOPLIST_FILE"] = "../src/app/appkit/macOS/Info.plist",
         ["MACOSX_DEPLOYMENT_TARGET"] = "10.14",
     }
 
-    -- xcodebuildresources {
-    --     "%{cfg.targetdir}/../Info.plist"
-    -- }
-    
     filter "system:macosx"
-        externalincludedirs {
-            "/usr/include", 
-            "/usr/local/include",
-            "/System/Library/Frameworks/Cocoa.framework/Headers",
-        }
-        libdirs {
-            "/usr/lib", 
-            "/usr/local/lib" 
-        }
+        -- externalincludedirs {
+        --     "/usr/include", 
+        --     "/usr/local/include",
+        --     "/System/Library/Frameworks/Cocoa.framework/Headers",
+        -- }
+        -- libdirs {
+        --     "/usr/lib", 
+        --     "/usr/local/lib" 
+        -- }
         links {
             "Cocoa.framework",
             "QuartzCore.framework",
@@ -98,6 +107,10 @@ project "Play-iOS"
         "src/app/appkit/**",
     }
 
+    includedirs {
+        "src/",
+    }
+
     externalincludedirs { "external/metal-cpp_macOS14.2_iOS17.2" }
 
     xcodebuildsettings {
@@ -107,6 +120,13 @@ project "Play-iOS"
         ["CLANG_ENABLE_MODULES"] = "YES",
         ["MTL_ENABLE_DEBUG_INFO"] = "YES",
         ["MTL_FAST_MATH"] = "YES",
+
+        ["CXX_STANDARD_LIBRARY"] = "libc++",
+        ["CLANG_CXX_LANGUAGE_STANDARD"] = "c++17",
+        ["CLANG_ENABLE_OBJC_WEAK"] = "YES",
+        ["CLANG_ENABLE_CXX_MODULES"] = "YES",
+        ["OTHER_CFLAGS"] = "-fmodules -fcxx-modules", 
+
         ["SDKROOT"] = "iphoneos",
         ["TARGETED_DEVICE_FAMILY"] = "1,2",
         ["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0",
@@ -119,10 +139,6 @@ project "Play-iOS"
             "$(SDKROOT)/usr/include/c++/v1",
         },
     }
-
-    -- xcodebuildresources {
-    --     "%{cfg.targetdir}/../Info.plist"
-    -- }
 
     filter "system:ios" 
         -- externalincludedirs {

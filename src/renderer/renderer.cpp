@@ -8,12 +8,15 @@
 #include <QuartzCore/CAMetalLayer.hpp>
 #include <simd/simd.h>
 
-Renderer::Renderer(MTL::Device* device) : _device(device)
+Renderer::Renderer(MTL::Device* device, MTL::PixelFormat pixelFormat)
+: _device(device)
+, _pixelFormat(pixelFormat)
 {
     _commandQueue = _device->newCommandQueue();
-    setupRenderPassDescriptor();
-    buildShaders();
-    buildBuffers();
+
+    SetupRenderPassDescriptor();
+    BuildShaders();
+    BuildBuffers();
 }
 
 Renderer::~Renderer()
@@ -25,7 +28,7 @@ Renderer::~Renderer()
     _commandQueue->release();
 }
 
-void Renderer::setupRenderPassDescriptor()
+void Renderer::SetupRenderPassDescriptor()
 {
     _renderPassDescriptor = MTL::RenderPassDescriptor::alloc();
     _renderPassDescriptor->init();
@@ -37,7 +40,7 @@ void Renderer::setupRenderPassDescriptor()
     colorAttachments->setObject(colorDesc, 0);
 }
 
-void Renderer::buildShaders()
+void Renderer::BuildShaders()
 {
     using NS::StringEncoding::UTF8StringEncoding;
 
@@ -81,7 +84,7 @@ void Renderer::buildShaders()
     MTL::RenderPipelineDescriptor* desc = MTL::RenderPipelineDescriptor::alloc()->init();
     desc->setVertexFunction(vertexFn);
     desc->setFragmentFunction(fragFn);
-    desc->colorAttachments()->object(0)->setPixelFormat(MTL::PixelFormat::PixelFormatBGRA8Unorm);
+    desc->colorAttachments()->object(0)->setPixelFormat(_pixelFormat);
 
     _pipelineState = _device->newRenderPipelineState(desc, &error);
     if (!_pipelineState)
@@ -96,7 +99,7 @@ void Renderer::buildShaders()
     library->release();
 }
 
-void Renderer::buildBuffers()
+void Renderer::BuildBuffers()
 {
     const size_t NumVertices = 3;
 
@@ -115,20 +118,17 @@ void Renderer::buildBuffers()
     const size_t positionsDataSize = NumVertices * sizeof(simd::float3);
     const size_t colorDataSize = NumVertices * sizeof(simd::float3);
 
-    MTL::Buffer* vertexPositionsBuffer = _device->newBuffer(positionsDataSize, MTL::ResourceStorageModeManaged);
-    MTL::Buffer* vertexColorsBuffer = _device->newBuffer(colorDataSize, MTL::ResourceStorageModeManaged);
+    MTL::Buffer* vertexPositionsBuffer = _device->newBuffer(positionsDataSize, MTL::ResourceStorageModeShared);
+    MTL::Buffer* vertexColorsBuffer = _device->newBuffer(colorDataSize, MTL::ResourceStorageModeShared);
 
     _vertexPositionsBuffer = vertexPositionsBuffer;
     _vertexColorsBuffer = vertexColorsBuffer;
 
     memcpy(_vertexPositionsBuffer->contents(), positions, positionsDataSize);
     memcpy(_vertexColorsBuffer->contents(), colors, colorDataSize);
-
-    _vertexPositionsBuffer->didModifyRange(NS::Range::Make(0, _vertexPositionsBuffer->length()));
-    _vertexColorsBuffer->didModifyRange(NS::Range::Make(0, _vertexColorsBuffer->length()));
 }
 
-void Renderer::draw(CA::MetalLayer* layer)
+void Renderer::Render(CA::MetalLayer* layer)
 {
     CA::MetalDrawable* drawable = layer->nextDrawable();
     if (!drawable)
