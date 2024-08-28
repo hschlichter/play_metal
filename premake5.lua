@@ -12,7 +12,6 @@ project "Play-MacOS"
     architecture "ARM64"
     defines { "TARGET_MACOS" }
     targetname "Play"
-    -- targetdir "_out/MacOS/%{cfg.buildcfg}/Play.app/Contents/MacOS/"
     targetdir "_out/MacOS/%{cfg.buildcfg}"
     objdir "_temp/MacOS/%{cfg.buildcfg}"
 
@@ -55,15 +54,6 @@ project "Play-MacOS"
     }
 
     filter "system:macosx"
-        -- externalincludedirs {
-        --     "/usr/include", 
-        --     "/usr/local/include",
-        --     "/System/Library/Frameworks/Cocoa.framework/Headers",
-        -- }
-        -- libdirs {
-        --     "/usr/lib", 
-        --     "/usr/local/lib" 
-        -- }
         links {
             "Cocoa.framework",
             "QuartzCore.framework",
@@ -71,10 +61,6 @@ project "Play-MacOS"
             "Metal.framework",
             "MetalKit.framework",
         }
-        -- postbuildcommands {
-        --     "{COPY} ../src/app/appkit/macOS/Info.plist %{cfg.targetdir}/../",
-        --     "{COPY} ../src/app/appkit/macOS/Base.lproj/Main.Storyboard %{cfg.targetdir}/Main.storyboard",
-        -- }
 
     filter "configurations:Debug"
         defines { "DEBUG" }
@@ -90,7 +76,6 @@ project "Play-iOS"
     architecture "ARM64"
     defines { "TARGET_IOS" }
     targetname "Play"
-    -- targetdir "_out/iOS/%{cfg.buildcfg}/Play.app/Contents/MacOS/"
     targetdir "_out/iOS/%{cfg.buildcfg}"
     objdir "_temp/iOS/%{cfg.buildcfg}"
 
@@ -141,12 +126,6 @@ project "Play-iOS"
     }
 
     filter "system:ios" 
-        -- externalincludedirs {
-        --     "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include"
-        -- }
-        -- libdirs {
-        --     "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib"
-        -- }
         links {
             "UIKit.framework",
             "Foundation.framework",
@@ -154,10 +133,6 @@ project "Play-iOS"
             "Metal.framework",
             "MetalKit.framework",
         }
-        -- postbuildcommands {
-        --     "{COPY} ../src/app/uikit/iOS/Info.plist %{cfg.targetdir}/../Info.plist",
-        --     "{COPY} ../src/app/uikit/iOS/Base.lproj/Main.Storyboard %{cfg.targetdir}/Main.storyboard",
-        -- }
 
     filter "configurations:Debug"
         defines { "DEBUG" }

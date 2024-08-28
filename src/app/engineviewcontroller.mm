@@ -27,10 +27,6 @@
     view.metalLayer.pixelFormat = pixelFormat;
 
     _renderer = new Renderer((__bridge MTL::Device*)device, (MTL::PixelFormat)pixelFormat);
-    
-    
-//    _renderer = [[AAPLRenderer alloc] initWithMetalDevice:device
-//                                      drawablePixelFormat:view.metalLayer.pixelFormat];
 }
 
 - (void)drawableResize:(CGSize)size
@@ -40,7 +36,6 @@
 
 - (void)renderToMetalLayer:(nonnull CAMetalLayer*)layer
 {
-//    [_renderer renderToMetalLayer:layer];
     _renderer->Render((__bridge CA::MetalLayer*)layer);
 }
 

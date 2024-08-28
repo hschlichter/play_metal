@@ -68,12 +68,12 @@
     _displayLink.preferredFramesPerSecond = 60;
 }
 
-- (void)didEnterBackground:(NSNotification*)notification
+- (void)applicationDidEnterBackground
 {
     self.paused = YES;
 }
 
-- (void)willEnterForeground:(NSNotification*)notification
+- (void)applicationWillEnterForeground
 {
     self.paused = NO;
 }

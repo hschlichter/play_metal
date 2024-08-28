@@ -27,6 +27,19 @@
     _metalLayer = (CAMetalLayer*) self.layer;
 
     self.layer.delegate = self;
+
+#if defined(TARGET_IOS)
+    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(applicationDidEnterBackground)
+                   name:UIApplicationDidEnterBackgroundNotification
+                 object:nil];
+    
+    [center addObserver:self
+               selector:@selector(applicationWillEnterForeground)
+                   name:UIApplicationWillEnterForegroundNotification
+                 object:nil];
+#endif
 }
 
 - (void)stopRenderLoop
@@ -36,6 +49,10 @@
 
 - (void)dealloc
 {
+#if defined(TARGET_IOS)
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+#endif
+    
     [self stopRenderLoop];
 }
 

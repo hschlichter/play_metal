@@ -12,4 +12,8 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 #endif
 
+@property (nonatomic, assign) BOOL keepRunning;
+@property (nonatomic, assign) BOOL isInBackground;
+@property (nonatomic, assign) CFTimeInterval lastUpdateTime;
+
 @end
