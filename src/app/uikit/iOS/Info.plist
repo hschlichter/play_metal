@@ -7,7 +7,8 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.example.apple-samplecode.CustomMetalView${SAMPLE_CODE_DISAMBIGUATOR}</string>
+	<!-- <string>com.example.ios.Play${SAMPLE_CODE_DISAMBIGUATOR}</string> -->
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

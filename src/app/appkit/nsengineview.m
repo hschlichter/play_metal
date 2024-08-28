@@ -1,4 +1,4 @@
-#import "NSEngineView.h"
+#import "nsengineview.h"
 
 @implementation NSEngineView
 {

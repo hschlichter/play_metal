@@ -6,7 +6,7 @@
 #define PlatformViewController NSViewController
 #endif
 
-#import "EngineView.h"
+#import "engineview.h"
 
 @interface EngineViewController : PlatformViewController <EngineViewDelegate>
 

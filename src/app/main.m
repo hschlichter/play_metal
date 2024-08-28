@@ -1,7 +1,7 @@
 #if defined(TARGET_IOS)
 #import <UIKit/UIKit.h>
 #import <TargetConditionals.h>
-#import "AppDelegate.h"
+#import "appdelegate.h"
 #else
 #import <Cocoa/Cocoa.h>
 #endif
