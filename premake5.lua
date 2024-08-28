@@ -6,6 +6,18 @@ workspace "Play"
         language "C++"
         cppdialect "C++17"
 
+    xcodebuildsettings {
+        ["CLANG_ENABLE_OBJC_ARC"] = "YES",
+        ["CLANG_ENABLE_MODULES"] = "YES",
+        ["CXX_STANDARD_LIBRARY"] = "libc++",
+        ["CLANG_CXX_LANGUAGE_STANDARD"] = "c++17",
+        ["CLANG_ENABLE_OBJC_WEAK"] = "YES",
+        ["CLANG_ENABLE_CXX_MODULES"] = "YES",
+        ["OTHER_CFLAGS"] = "-fmodules -fcxx-modules", 
+        ["MTL_ENABLE_DEBUG_INFO"] = "YES",
+        ["MTL_FAST_MATH"] = "YES",
+    }
+
 project "Play-MacOS"
     kind "WindowedApp"
     system "macosx"
@@ -38,17 +50,6 @@ project "Play-MacOS"
 
     xcodebuildsettings {
         ["PRODUCT_BUNDLE_IDENTIFIER"] = "com.example.macos.Play",
-        ["CLANG_ENABLE_OBJC_ARC"] = "YES",
-        ["CLANG_ENABLE_MODULES"] = "YES",
-
-        ["CXX_STANDARD_LIBRARY"] = "libc++",
-        ["CLANG_CXX_LANGUAGE_STANDARD"] = "c++17",
-        ["CLANG_ENABLE_OBJC_WEAK"] = "YES",
-        ["CLANG_ENABLE_CXX_MODULES"] = "YES",
-        ["OTHER_CFLAGS"] = "-fmodules -fcxx-modules", 
-        
-        ["MTL_ENABLE_DEBUG_INFO"] = "YES",
-        ["MTL_FAST_MATH"] = "YES",
         ["INFOPLIST_FILE"] = "../src/app/appkit/macOS/Info.plist",
         ["MACOSX_DEPLOYMENT_TARGET"] = "10.14",
     }
@@ -101,17 +102,6 @@ project "Play-iOS"
     xcodebuildsettings {
         ["PRODUCT_BUNDLE_IDENTIFIER"] = "com.example.ios.Play",
         ["INFOPLIST_FILE"] = "../src/app/uikit/iOS/Info.plist",
-        ["CLANG_ENABLE_OBJC_ARC"] = "YES",
-        ["CLANG_ENABLE_MODULES"] = "YES",
-        ["MTL_ENABLE_DEBUG_INFO"] = "YES",
-        ["MTL_FAST_MATH"] = "YES",
-
-        ["CXX_STANDARD_LIBRARY"] = "libc++",
-        ["CLANG_CXX_LANGUAGE_STANDARD"] = "c++17",
-        ["CLANG_ENABLE_OBJC_WEAK"] = "YES",
-        ["CLANG_ENABLE_CXX_MODULES"] = "YES",
-        ["OTHER_CFLAGS"] = "-fmodules -fcxx-modules", 
-
         ["SDKROOT"] = "iphoneos",
         ["TARGETED_DEVICE_FAMILY"] = "1,2",
         ["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0",
