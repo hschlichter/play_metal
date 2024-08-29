@@ -2,9 +2,9 @@
 #import <Metal/Metal.h>
 
 #if TARGET_IOS
-@import UIKit;
+#import <UIKit/UIKit.h>
 #else
-@import AppKit;
+#import <AppKit/AppKit.h>
 #endif
 
 // Protocol to provide resize and redraw callbacks to a delegate

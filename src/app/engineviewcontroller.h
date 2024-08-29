@@ -1,8 +1,8 @@
 #if defined(TARGET_IOS)
-@import UIKit;
+#import <UIKit/UIKit.h>
 #define PlatformViewController UIViewController
 #else
-@import AppKit;
+#include <AppKit/AppKit.h>
 #define PlatformViewController NSViewController
 #endif
 

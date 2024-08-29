@@ -8,12 +8,11 @@ workspace "Play"
 
     xcodebuildsettings {
         ["CLANG_ENABLE_OBJC_ARC"] = "YES",
-        ["CLANG_ENABLE_MODULES"] = "YES",
+        ["CLANG_ENABLE_MODULES"] = "NO",
+        ["CLANG_ENABLE_CXX_MODULES"] = "NO",
         ["CXX_STANDARD_LIBRARY"] = "libc++",
         ["CLANG_CXX_LANGUAGE_STANDARD"] = "c++17",
         ["CLANG_ENABLE_OBJC_WEAK"] = "YES",
-        ["CLANG_ENABLE_CXX_MODULES"] = "YES",
-        ["OTHER_CFLAGS"] = "-fmodules -fcxx-modules", 
         ["MTL_ENABLE_DEBUG_INFO"] = "YES",
         ["MTL_FAST_MATH"] = "YES",
     }
